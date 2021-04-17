@@ -32,9 +32,41 @@ $spell
     fabs
     hpp
     var
+    vec
 $$
 
 $section Changes and Additions to CppAD During 2021$$
+
+$head 04-16$$
+Improve the instruction for adding a new speed test package; see
+$cref speed_xpackage$$.
+
+$head 04-09$$
+The $cref cpp_graph_print$$ operation was failing when there were
+atomic or discrete functions. This has been fixed.
+
+$head 04-07$$
+Documentation was added for the
+$cref/print_graph_op/cpp_ad_graph/operator_arg/print_graph_op/$$ operator.
+This is different from the function
+$cref cpp_graph_print$$ which prints an entire graph.
+
+
+$head 04-05$$
+The $cref cpp_graph_print$$ operation was modified so that it printed the
+text corresponding to atomic function names, discrete function names,
+and print operators.
+
+$head 04-02$$
+The enum value $code dis_graph_op$$ was corrected to $code discrete_graph_op$$
+in the documentation for
+$cref/discrete_graph_op/cpp_ad_graph/operator_arg/discrete_graph_op/$$.
+
+
+$head 03-29$$
+Include the $cref/dependent_vec/cpp_ad_graph/dependent_vec/$$
+in the output of $cref cpp_graph_print$$; see $code y nodes$$ in
+$cref print_graph.cpp$$ example output.
 
 $head 03-24$$
 The C++ AD graph constructor, $cref cpp_graph_ctor$$,
