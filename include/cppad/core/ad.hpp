@@ -273,6 +273,9 @@ public:
         bool FunName(const Base &x, const Base &y),
         const AD<Base> &x , const AD<Base> &y
     );
+    
+public:
+    static inline local::ADTape<Base>* tape_table[CPPAD_MAX_NUM_THREADS];
 
 private:
     // -----------------------------------------------------------------
