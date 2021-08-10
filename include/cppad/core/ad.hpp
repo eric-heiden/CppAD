@@ -274,6 +274,9 @@ public:
         const AD<Base> &x , const AD<Base> &y
     );
 
+    static inline std::vector<local::atomic_index_info>* atomic_index_infos = new std::vector<local::atomic_index_info>;
+
+    static inline tape_id_t* tape_id_table = new tape_id_t[CPPAD_MAX_NUM_THREADS]{0};
 private:
     // -----------------------------------------------------------------
     // Make this parameter a new variable

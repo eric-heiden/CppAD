@@ -46,11 +46,11 @@ is a pointer to the tape identifier for this thread and AD<Base> class.
 template <class Base>
 tape_id_t* AD<Base>::tape_id_ptr(size_t thread)
 {   CPPAD_ASSERT_FIRST_CALL_NOT_PARALLEL;
-    static tape_id_t tape_id_table[CPPAD_MAX_NUM_THREADS];
+    // static tape_id_t tape_id_table[CPPAD_MAX_NUM_THREADS];
     CPPAD_ASSERT_UNKNOWN(
         (! thread_alloc::in_parallel()) || thread == thread_alloc::thread_num()
     );
-    return tape_id_table + thread;
+    return AD<Base>::tape_id_table + thread;
 }
 
 /*!

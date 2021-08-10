@@ -301,7 +301,14 @@ This index starts at zero after the default constructor.
 */
 template <class Base>
 addr_t recorder<Base>::PutOp(OpCode op)
-{   size_t i    = op_vec_.extend(1);
+{   
+    if (op == CppAD::local::LevpOp) {
+        printf("LevpOp\n");
+    } else if (op == CppAD::local::LepvOp ) {
+        printf("LepvOp\n");
+    }
+    
+    size_t i    = op_vec_.extend(1);
     CPPAD_ASSERT_KNOWN(
         (abort_op_index_ == 0) || (abort_op_index_ != i),
         "Operator index equals abort_op_index in Independent"

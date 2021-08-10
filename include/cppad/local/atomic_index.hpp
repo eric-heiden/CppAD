@@ -119,7 +119,8 @@ size_t atomic_index(
 // END_PROTOTYPE
 {   //
     // information for each index
-    static std::vector<atomic_index_info> vec;
+    std::vector<atomic_index_info> &vec = *AD<Base>::atomic_index_infos;
+    std::cout << "Atomic index infos has " << vec.size() << " entries.\n";
 # ifndef NDEBUG
     if( index_in == 0 || set_null )
     {   CPPAD_ASSERT_KNOWN( ! thread_alloc::in_parallel(),
