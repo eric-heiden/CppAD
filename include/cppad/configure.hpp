@@ -77,7 +77,7 @@ $srccode%hpp% */
 $head CPPAD_PACKAGE_STRING$$
 cppad-yyyymmdd as a C string where yyyy is year, mm is month, and dd is day.
 $srccode%hpp% */
-# define CPPAD_PACKAGE_STRING "cppad-20210416"
+# define CPPAD_PACKAGE_STRING "cppad-20210309"
 /* %$$
 
 $head CPPAD_HAS_ADOLC$$
@@ -203,7 +203,7 @@ $srccode%hpp% */
 $head CPPAD_HAS_TMPNAM_S$$
 It true, tmpnam_s works in C++ on this system.
 $srccode%hpp% */
-# define CPPAD_HAS_TMPNAM_S 1
+# define CPPAD_HAS_TMPNAM_S 0
 /* %$$
 
 $head CPPAD_NULL$$

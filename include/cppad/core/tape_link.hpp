@@ -72,7 +72,7 @@ is a handle for the tape for this AD<Base> class and the specified thread.
 template <class Base>
 local::ADTape<Base>** AD<Base>::tape_handle(size_t thread)
 {   CPPAD_ASSERT_FIRST_CALL_NOT_PARALLEL;
-    static local::ADTape<Base>* tape_table[CPPAD_MAX_NUM_THREADS];
+    // static local::ADTape<Base>* tape_table[CPPAD_MAX_NUM_THREADS];
     CPPAD_ASSERT_UNKNOWN(
         (! thread_alloc::in_parallel()) || thread == thread_alloc::thread_num()
     );
@@ -211,6 +211,7 @@ local::ADTape<Base>*  AD<Base>::tape_manage(tape_manage_enum job)
         );
         // set the tape_id for this tape
         (*tape_h)->id_ = *tape_id_p;
+        printf("Creating new tape with ID %i\n", (int)*tape_id_p);
     }
     // -----------------------------------------------------------------------
     // delete_tape_manage
@@ -228,6 +229,7 @@ local::ADTape<Base>*  AD<Base>::tape_manage(tape_manage_enum job)
             "CPPAD_TAPE_ID_TYPE"
         );
         *tape_id_p  += CPPAD_MAX_NUM_THREADS;
+        printf("Deleted tape\n");
     }
     // -----------------------------------------------------------------------
     return *tape_h;
