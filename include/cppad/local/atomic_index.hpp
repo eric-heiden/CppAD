@@ -108,6 +108,12 @@ struct atomic_index_info {
     void*       ptr;
 };
 
+} // END_CPPAD_LOCAL_NAMESPACE
+
+static inline std::vector<local::atomic_index_info>* atomic_index_infos =
+    new std::vector<local::atomic_index_info>;
+
+namespace local { // BEGIN_CPPAD_LOCAL_NAMESPACE
 // BEGIN_ATOMIC_INDEX
 template <class Base>
 size_t atomic_index(
@@ -119,8 +125,8 @@ size_t atomic_index(
 // END_PROTOTYPE
 {   //
     // information for each index
-    std::vector<atomic_index_info> &vec = *AD<Base>::atomic_index_infos;
-    std::cout << "Atomic index infos has " << vec.size() << " entries.\n";
+    std::vector<atomic_index_info> &vec = *atomic_index_infos;
+    // std::cout << "Atomic index infos has " << vec.size() << " entries.\n";
 # ifndef NDEBUG
     if( index_in == 0 || set_null )
     {   CPPAD_ASSERT_KNOWN( ! thread_alloc::in_parallel(),
