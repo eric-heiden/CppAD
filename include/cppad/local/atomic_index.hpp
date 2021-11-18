@@ -108,10 +108,10 @@ struct atomic_index_info {
     void*       ptr;
 };
 
-} // END_CPPAD_LOCAL_NAMESPACE
-
 static inline std::vector<local::atomic_index_info>* atomic_index_infos =
     new std::vector<local::atomic_index_info>;
+
+} // END_CPPAD_LOCAL_NAMESPACE
 
 namespace local { // BEGIN_CPPAD_LOCAL_NAMESPACE
 // BEGIN_ATOMIC_INDEX
