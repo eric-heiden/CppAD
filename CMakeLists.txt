@@ -91,10 +91,7 @@ int main(void)
 }"
 )
 compile_source_test("${source}" cplusplus_201100_ok )
-IF( NOT cplusplus_201100_ok  )
-    SET(CMAKE_CXX_STANDARD 11)
-    SET(CMAKE_CXX_STANDARD_REQUIRED ON)
-ENDIF( NOT cplusplus_201100_ok  )
+SET(CMAKE_CXX_STANDARD 17)
 # =============================================================================
 # command line arguments
 # =============================================================================
