@@ -23,6 +23,7 @@ in the Eclipse Public License, Version 2.0 are satisfied:
 # include <cppad/local/record/recorder.hpp>
 # include <cppad/local/play/player.hpp>
 # include <cppad/local/ad_tape.hpp>
+# include <cppad/local/atomic_index_info.hpp>
 
 namespace CppAD { // BEGIN_CPPAD_NAMESPACE
 
@@ -35,7 +36,7 @@ tape_manage_enum;
 
 template <class Base>
 class AD {
-private :
+public :
     // -----------------------------------------------------------------------
     // Base type value for this object
     Base value_;
@@ -275,9 +276,10 @@ public:
     );
     
 public:
-    static inline local::ADTape<Base>* tape_table[CPPAD_MAX_NUM_THREADS];
-
+    static inline local::ADTape<Base>** tape_table = new local::ADTape<Base>*[CPPAD_MAX_NUM_THREADS]{nullptr};
     static inline tape_id_t* tape_id_table = new tape_id_t[CPPAD_MAX_NUM_THREADS]{0};
+    static inline std::vector<local::atomic_index_info>* atomic_index_infos = new std::vector<local::atomic_index_info>;
+
 private:
     // -----------------------------------------------------------------
     // Make this parameter a new variable
@@ -294,6 +296,7 @@ private:
     //
     // not static
     local::ADTape<Base>* tape_this(void) const;
+public:
     //
     // static
     static tape_id_t*            tape_id_ptr(size_t thread);

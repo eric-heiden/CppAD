@@ -79,6 +79,7 @@ static variable inside of the thread_alloc::capacity_info function.
 Allocator class that works well with an multi-threading environment.
 */
 class thread_alloc{
+
 // ============================================================================
 private:
 
@@ -129,6 +130,8 @@ private:
         static const capacity_t capacity;
         return &capacity;
     }
+
+public:
     // ---------------------------------------------------------------------
     /// Structure of information for each thread
     struct thread_alloc_info {
@@ -166,6 +169,13 @@ private:
             value = new_value;
         return value;
     }
+    
+    
+public:
+    static inline thread_alloc_info** all_info = new thread_alloc_info*[CPPAD_MAX_NUM_THREADS]{nullptr};
+    static inline thread_alloc_info* zero_info = new thread_alloc_info;
+
+
     // ---------------------------------------------------------------------
     /*!
     Get pointer to the information for this thread.
@@ -194,9 +204,7 @@ private:
     static thread_alloc_info* thread_info(
         size_t             thread          ,
         bool               clear = false   )
-    {   static thread_alloc_info* all_info[CPPAD_MAX_NUM_THREADS];
-        static thread_alloc_info  zero_info;
-
+    {   
         CPPAD_ASSERT_FIRST_CALL_NOT_PARALLEL;
 
         CPPAD_ASSERT_UNKNOWN( thread < CPPAD_MAX_NUM_THREADS );
@@ -225,7 +233,7 @@ private:
         }
         else if( info == nullptr )
         {   if( thread == 0 )
-                info = &zero_info;
+                info = zero_info;
             else
             {   size_t size = sizeof(thread_alloc_info);
                 void* v_ptr = ::operator new(size);

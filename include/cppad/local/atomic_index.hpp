@@ -99,19 +99,11 @@ $end
 */
 # include <vector>
 # include <cppad/utility/thread_alloc.hpp>
+# include <cppad/local/atomic_index_info.hpp>
 
-namespace CppAD { namespace local { // BEGIN_CPPAD_LOCAL_NAMESPACE
-
-struct atomic_index_info {
-    size_t      type;
-    std::string name;
-    void*       ptr;
-};
-
-static inline std::vector<local::atomic_index_info>* atomic_index_infos =
-    new std::vector<local::atomic_index_info>;
-
-} // END_CPPAD_LOCAL_NAMESPACE
+namespace CppAD { 
+template<typename Base>
+class AD;
 
 namespace local { // BEGIN_CPPAD_LOCAL_NAMESPACE
 // BEGIN_ATOMIC_INDEX
@@ -123,10 +115,9 @@ size_t atomic_index(
     std::string*       name          ,
     void*&             ptr           )
 // END_PROTOTYPE
-{   //
+{  
     // information for each index
-    std::vector<atomic_index_info> &vec = *atomic_index_infos;
-    // std::cout << "Atomic index infos has " << vec.size() << " entries.\n";
+    std::vector<atomic_index_info> &vec = *AD<Base>::atomic_index_infos;
 # ifndef NDEBUG
     if( index_in == 0 || set_null )
     {   CPPAD_ASSERT_KNOWN( ! thread_alloc::in_parallel(),
@@ -140,6 +131,7 @@ size_t atomic_index(
     // case were we are retreving informaiton for an atomic function
     if( 0 < index_in )
     {   CPPAD_ASSERT_UNKNOWN( index_in <= vec.size() )
+        // std::cout << "\tRetrieving atomic at index_in=" << index_in << std::endl;
         //
         // case where we are setting the pointer to null
         if( set_null )
@@ -159,7 +151,7 @@ size_t atomic_index(
     entry.name = *name;
     entry.ptr  = ptr;
     vec.push_back(entry);
-    //
+
     return vec.size();
 }
 
