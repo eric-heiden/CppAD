@@ -1,5 +1,5 @@
 # ifndef CPPAD_CONFIGURE_HPP
-# define CPPAD_CONFIGURE_HPP
+# define CPPAD_CONFIGURE_HPP 
 /* --------------------------------------------------------------------------
 CppAD: C++ Algorithmic Differentiation: Copyright (C) 2003-20 Bradley M. Bell
 
